@@ -3,42 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Non-overlapping Slider Handles</title>
-    <style>
-        .slider-container {
-            width: 80%;
-            margin: 50px auto;
-        }
-        input[type="range"] {
-            width: 100%;
-        }
-    </style>
+    <title>Document</title>
 </head>
 <body>
-
-<div class="slider-container">
-    <input type="range" id="handle1" min="0" max="100" step="1" value="30">
-    <input type="range" id="handle2" min="0" max="100" step="1" value="70">
-</div>
-
-<script>
-    const handle1 = document.getElementById('handle1');
-    const handle2 = document.getElementById('handle2');
-
-    handle1.addEventListener('input', () => {
-        // Ensure handle2 is always greater than handle1
-        if (parseInt(handle1.value) >= parseInt(handle2.value)) {
-            handle1.value = handle2.value - 1;
-        }
-    });
-
-    handle2.addEventListener('input', () => {
-        // Ensure handle2 is always greater than handle1
-        if (parseInt(handle2.value) <= parseInt(handle1.value)) {
-            handle2.value = handle1.value + 1;
-        }
-    });
-</script>
-
+    
+    <script src="app.js"></script>
 </body>
 </html>
