@@ -55,3 +55,69 @@ function get_time_to_charge(charge_times, start_percentage, end_percentage) {
     return charge_times[end_percentage] - charge_times[start_percentage]
 }
 
+function get_makers() {
+    return Object.keys(all_cars)
+}
+
+function get_models(maker) {
+    return Object.keys(all_cars[maker])
+}
+
+function get_sub_models(maker, model) {
+    return Object.keys(all_cars[maker][model])
+}
+
+function create_option(content) {
+    const option_el = document.createElement("option")
+    option_el.setAttribute("value", content)
+    option_el.textContent = content
+    return option_el
+}
+
+const app = document.querySelector("#app")
+const maker_input = document.createElement("select")
+const maker_label = document.createElement("label")
+maker_input.setAttribute("id", "maker")
+maker_label.setAttribute("for", "maker")
+maker_label.textContent = "Make: "
+app.append(maker_label)
+app.append(maker_input)
+
+function create_empty_option() {
+    const empty = document.createElement("option")
+    empty.hidden = true
+    return empty
+}
+
+const maker_options = get_makers().map((maker) => create_option(maker))
+maker_input.append(create_empty_option(), ...maker_options)
+
+const model_input = document.createElement("select")
+const model_label = document.createElement("label")
+model_input.setAttribute("id", "model")
+model_label.setAttribute("for", "model")
+model_label.textContent = "Model: "
+app.append(model_label)
+app.append(model_input)
+
+maker_input.addEventListener("change", (e) => {
+    const maker = e.target.value
+    console.log(maker)
+    const model_options = get_models(maker).map((model => create_option(model)))
+    model_input.replaceChildren(create_empty_option(), ...model_options)
+})
+
+
+const submodel_input = document.createElement("select")
+const submodel_label = document.createElement("label")
+submodel_input.setAttribute("id", "submodel")
+submodel_label.setAttribute("for", "submodel")
+submodel_label.textContent = "Submodel: "
+app.append(submodel_label)
+app.append(submodel_input)
+
+const start_percentage = document.createElement("input")
+const end_percentage = document.createElement("input")
+
+
+
