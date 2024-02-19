@@ -105,6 +105,7 @@ maker_input.addEventListener("change", (e) => {
     console.log(maker)
     const model_options = get_models(maker).map((model => create_option(model)))
     model_input.replaceChildren(create_empty_option(), ...model_options)
+    submodel_input.replaceChildren()
 })
 
 
@@ -115,6 +116,14 @@ submodel_label.setAttribute("for", "submodel")
 submodel_label.textContent = "Submodel: "
 app.append(submodel_label)
 app.append(submodel_input)
+
+model_input.addEventListener("change", (e) => {
+    const model = e.target.value
+    console.log(model)
+    const maker = maker_input.value
+    const submodel_options = get_sub_models(maker, model).map((submodel => create_option(submodel)))
+    submodel_input.replaceChildren(create_empty_option(), ...submodel_options)
+})
 
 const start_percentage = document.createElement("input")
 const end_percentage = document.createElement("input")
