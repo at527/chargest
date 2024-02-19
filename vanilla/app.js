@@ -126,7 +126,53 @@ model_input.addEventListener("change", (e) => {
 })
 
 const start_percentage = document.createElement("input")
+const start_perc_label = document.createElement("label")
+start_percentage.setAttribute("type", "number")
+start_percentage.setAttribute("id", "start_percentage")
+start_percentage.setAttribute("min", "0")
+start_percentage.setAttribute("max", "100")
+start_perc_label.setAttribute("for", "start_percentage")
+start_perc_label.textContent = "Start Percentage"
+
 const end_percentage = document.createElement("input")
+const end_perc_label = document.createElement("label")
+end_percentage.setAttribute("type", "number")
+end_percentage.setAttribute("id", "end_percentage")
+end_percentage.setAttribute("min", "0")
+end_percentage.setAttribute("max", "100")
+end_perc_label.setAttribute("for", "end_percentage")
+end_perc_label.textContent = "End Percentage"
 
+app.append(start_perc_label, start_percentage, end_perc_label, end_percentage)
 
+const result = document.createElement("div")
+app.append(result)
+
+function recompute_and_display_time(input_state) {
+    const car = get_car_charge_times(input_state.maker, input_state.model, input_state.submodel)
+    const time_seconds = get_time_to_charge(car, input_state.start_percent, input_state.end_percent)
+    result.textContent = time_seconds
+}
+
+function handle_input_change(e) {
+    const input_state = {
+        "maker": maker_input.value,
+        "model": model_input.value,
+        "submodel": submodel_input.value,
+        "start_percent": start_percentage.value,
+        "end_percent": end_percentage.value
+    }
+
+    if (Object.values(input_state).includes("")) {
+        return 
+    }
+
+    recompute_and_display_time(input_state)
+}
+
+maker_input.addEventListener("input", handle_input_change)
+model_input.addEventListener("input", handle_input_change)
+submodel_input.addEventListener("input", handle_input_change)
+start_percentage.addEventListener("input", handle_input_change)
+end_percentage.addEventListener("input", handle_input_change)
 
