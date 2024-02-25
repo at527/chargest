@@ -8,10 +8,33 @@
 </head>
 
 <body>
-    
-    <div id="app"></div>
+
+    <form>
+        <label>
+            Makers:
+            <select id="maker_input"></select>
+        </label>
+        <label>
+            Model:
+            <select id="model_input"></select>
+        </label>
+        <label>
+            Submodel:
+            <select id="submodel_input"></select>
+        </label>
+        <label>
+            Start Charge
+            <input type="number" min="0" max="100" placeholder="20" id="start_percent_input">
+        </label>
+        <label>
+            End Charge
+            <input type="number" min="0" max="100" placeholder="80" id="end_percent_input">
+        </label>
+    </form>
 
     <script src="app.js"></script>
+    <script>
+    </script>
 </body>
 
 </html>
