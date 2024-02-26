@@ -1,40 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="app.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+    <body>
+        <form>
+            <p>
+                <label>
+                    Makers
+                    <select id="maker_input"></select>
+                </label>
+            </p>
 
-<body>
+            <p>
+                <label>
+                    Model
+                    <select id="model_input"></select>
+                </label>
+            </p>
 
-    <form>
-        <label>
-            Makers:
-            <select id="maker_input"></select>
-        </label>
-        <label>
-            Model:
-            <select id="model_input"></select>
-        </label>
-        <label>
-            Submodel:
-            <select id="submodel_input"></select>
-        </label>
-        <label>
-            Start Charge
-            <input type="number" min="0" max="100" placeholder="20" id="start_percent_input">
-        </label>
-        <label>
-            End Charge
-            <input type="number" min="0" max="100" placeholder="80" id="end_percent_input">
-        </label>
-    </form>
+            <p>
+                <label>
+                    Submodel
+                    <select id="submodel_input"></select>
+                </label>
+            </p>
 
-    <script src="app.js"></script>
-    <script>
-    </script>
-</body>
+            <p>
+                <label>
+                    Start Charge
+                    <input
+                        type="number"
+                        inputmode="numeric"
+                        min="0"
+                        max="100"
+                        value="20"
+                        id="start_percent_input"
+                    />
+                </label>
+            </p>
 
+            <p>
+                <label>
+                    End Charge
+                    <input
+                        type="number"
+                        inputmode="numeric"
+                        min="0"
+                        max="100"
+                        value="80"
+                        id="end_percent_input"
+                    />
+                </label>
+            </p>
+        </form>
+
+        <div>Charge Time: <span id="result"></span></div>
+
+        <script src="app.js"></script>
+        <script></script>
+    </body>
 </html>

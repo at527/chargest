@@ -1,0 +1,21 @@
+input,
+label,
+select {
+    display: block;
+}
+
+select, input {
+    height: 2.75rem;
+    min-width: 8.5rem;
+    font-size: 1rem;
+}
+
+input {
+    height: 2.75rem;
+}
+
+body {
+    font-family: sans-serif;
+    padding: 2rem;
+    font-size: 1.1rem;
+}
