@@ -632,6 +632,7 @@ function create_model_options() {
 
 function create_submodel_options() {
     const sub_model_opt_els = {};
+    const makers = get_makers();
 
     for (let maker of makers) {
         const models = get_models(maker);
@@ -645,12 +646,45 @@ function create_submodel_options() {
     return sub_model_opt_els;
 }
 
+function update_models() {
+    const maker = maker_input.value;
+    model_input.replaceChildren(...model_option_els[maker]);
+    submodel_input.replaceChildren(...sub_model_opt_els[maker][model_input.value]);
+}
+
+function update_submodels() {
+    const maker = maker_input.value;
+    const model = model_input.value;
+    submodel_input.replaceChildren(...sub_model_opt_els[maker][model]);
+}
+
+function save_input() {
+    
+}
+
+function handle_input(e) {
+    // update models and submodels for maker change
+    if (e.target === maker_input) {
+        update_models();
+        update_submodels();
+    }
+    // update submodels for model change
+    else if (e.target === model_input) {
+        update_submodels();
+    }
+
+    update_result();
+}
+
 const maker_input = document.querySelector("#maker_input");
 const model_input = document.querySelector("#model_input");
 const submodel_input = document.querySelector("#submodel_input");
 const start_percent_input = document.querySelector("#start_percent_input");
 const end_percent_input = document.querySelector("#end_percent_input");
 const result_output = document.querySelector("#result");
+
+const model_option_els = create_model_options();
+const sub_model_opt_els = create_submodel_options();
 
 const all_inputs = [
     maker_input,
@@ -664,33 +698,27 @@ const makers = get_makers();
 const maker_option_els = make_all_options(makers);
 maker_input.append(...maker_option_els);
 
-const model_option_els = create_model_options();
+
 
 maker_input.addEventListener("change", (e) => {
-    const maker = e.target.value;
-    model_input.replaceChildren(...model_option_els[maker]);
-    submodel_input.replaceChildren(...sub_model_opt_els[maker][model_input.value]);
-    update_result();
+    handle_input(e);
 });
 
-const sub_model_opt_els = create_submodel_options();
 
-model_input.addEventListener("change", () => {
-    const maker = maker_input.value;
-    const model = model_input.value;
-    submodel_input.replaceChildren(...sub_model_opt_els[maker][model]);
-    update_result();
+
+model_input.addEventListener("change", (e) => {
+    handle_input(e);
 });
 
-submodel_input.addEventListener("change", () => {
-    update_result();
+submodel_input.addEventListener("change", (e) => {
+    handle_input(e);
 });
 
-start_percent_input.addEventListener("input", () => {
-    update_result();
+start_percent_input.addEventListener("input", (e) => {
+    handle_input(e);
 });
-end_percent_input.addEventListener("input", () => {
-    update_result();
+end_percent_input.addEventListener("input", (e) => {
+    handle_input(e);
 });
 
 window.addEventListener("load", (event) => {
@@ -699,61 +727,3 @@ window.addEventListener("load", (event) => {
     update_result();
 });
 
-// for (input of all_inputs) {
-//     input.addEventListener("input", () => {
-//         handle_input_change();
-//     });
-// }
-
-// const app = document.querySelector("#app")
-// const form = document.createElement("form")
-// app.append(form)
-
-// const maker = create_dropdown("Make: ")
-// const maker_input = maker.input
-// form.append(maker.div)
-
-// const maker_options = get_makers().map((maker) => create_option(maker))
-// maker_input.append(create_empty_option(), ...maker_options)
-
-// const model = create_dropdown("Model: ")
-// const model_input = model.input
-// form.append(model.div)
-
-// maker_input.addEventListener("change", (e) => {
-//     const maker = e.target.value
-//     console.log(maker)
-//     const model_options = get_models(maker).map((model => create_option(model)))
-//     model_input.replaceChildren(create_empty_option(), ...model_options)
-//     submodel_input.replaceChildren()
-// })
-
-// const submodel = create_dropdown("Submodel: ")
-
-// const submodel_input = submodel.input
-// form.append(submodel.div)
-
-// model_input.addEventListener("change", (e) => {
-//     const model = e.target.value
-//     console.log(model)
-//     const maker = maker_input.value
-//     const submodel_options = get_sub_models(maker, model).map((submodel => create_option(submodel)))
-//     submodel_input.replaceChildren(create_empty_option(), ...submodel_options)
-// })
-
-// const start_percent = create_number_input("Start Percent: ")
-// const end_percent = create_number_input("End Percent: ")
-
-// const start_percent_input = start_percent.input
-// const end_percent_input = end_percent.input
-
-// form.append(start_percent.div, end_percent.div)
-
-// const result = document.createElement("div")
-// app.append(result)
-
-// maker_input.addEventListener("input", handle_input_change)
-// model_input.addEventListener("input", handle_input_change)
-// submodel_input.addEventListener("input", handle_input_change)
-// start_percent_input.addEventListener("input", handle_input_change)
-// end_percent_input.addEventListener("input", handle_input_change)
